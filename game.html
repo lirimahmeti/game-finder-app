@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Deals</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body >
+    <header></header>
+    <section class="container mb-5">
+        <div class="deals row d-flex justify-content-around align-items-start "></div>
+    </section>
+
+    <footer class=" bg-dark py-4 mt-auto"></footer>
+    
+    <script src="./js/dynamicListener.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module">
+        import {initHeader} from './modules/Header.js';
+        import {initFooter} from './modules/Footer.js';
+        import {getGame, initDeals, initGame} from './modules/Game.js';
+    
+        let current_game;      
+        const id = window.location.href.split('=')[1]
+
+        initHeader(document.querySelector('header'))
+        
+        
+        if(window.location.href.indexOf('=') > -1){
+         getGame(id).then(data => {document.querySelector('.deals').innerHTML = initGame(data.info)
+         document.querySelector('.deals').innerHTML += initDeals(data)
+         console.log(data)
+         current_game = data
+        })
+        }else{
+            window.location.href = `http://127.0.0.1:5500/index.html`
+        }
+
+        addDynamicEventListener(document.body, 'click', '#add-to-favourites', function (e){
+            const favourites = (localStorage.getItem('favourites') == null ? [] : JSON.parse(localStorage.getItem('favourites')))
+            const user_is_loggedin = localStorage.getItem('loggedin_user')
+
+
+            if (user_is_loggedin == null){
+                alert('Please login to add game to watch price list!');
+                return;
+            }
+
+            console.log(favourites);
+            if(favourites.length > 0){
+                const existing_favourites = favourites.filter(g => g.info.thumb == current_game.info.thumb)
+
+                if(existing_favourites.length > 0){
+                    alert(`Game: ${current_game.info.title} is already in your watch list`)
+                }else{
+                    localStorage.setItem('favourites', JSON.stringify([...favourites, current_game]))
+                    alert(`Game: ${current_game.info.title} has been added to your watch price list`)
+                }
+
+            }else{
+                localStorage.setItem('favourites', JSON.stringify([current_game]))
+                alert(`Game: ${current_game.title} has been added to your watch price list`)
+            }console.log(id);
+            console.log(favourites);
+        })
+
+        addDynamicEventListener(document.body, 'submit', 'header form', e=>{
+            e.preventDefault()
+            window.location.href = `http://127.0.0.1:5500/games.html?q=${e.target.elements[0].value}`;
+        })
+
+        // opsioni per logout
+        addDynamicEventListener(document.body, 'click', '#logout', function (e){
+            var conf = confirm('Do you want to log out?')
+
+            if(conf){
+                e.preventDefault()
+                localStorage.removeItem('loggedin_user')
+                window.location.href = `http://127.0.0.1:5500/index.html`
+            }else{
+                return
+            }
+        })
+        initFooter(document.querySelector('footer'))
+    </script>
+</body>
+</html>
