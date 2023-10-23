@@ -91,15 +91,17 @@ export function initSearchRes(res) {
         for(let game of res){
         // console.log();
         html += `
-        <div class="card col-xl-3 col-lg-5 col-md-5 col-sm-5 m-3">
-            <img src="${game.thumb}" class="card-img-top" alt="thumbnail of game: ${game.external}">
-            <div class="card-body d-flex flex-column align-items-start justify-content-between">
-            <div class="mb-3">
-            <h5 class="card-title">${game.external}</h5>                  
-            <p class="m-0 text-danger ${(game.isOnSale == "1")? "d-flex": "d-none"}">${game.normalPrice}$</p>
-            <h3 class="text-success"><p class="text-dark fs-6 m-0 fw-light">Cheapest price:</p>${(game.cheapest == 0.00)?`It's Free!`: `${game.cheapest}$`}</h3>
-            </div>
-            <a href="./game.html?q=${game.gameID}" class="btn details btn-primary" id="${game.gameID}">View Deals</a>
+        <div class="col-xxl-3 col-lg-3 col-md-4 col-sm-12 d-flex align-items-between justify-content-center">
+            <div class="card  mb-3 w-100">
+                <img src="${game.thumb}" class="card-img-top" alt="thumbnail of game: ${game.external}">
+                <div class="card-body d-flex flex-column align-items-start justify-content-between">
+                <div class="mb-3">
+                <h5 class="card-title">${game.external}</h5>                  
+                <p class="m-0 text-danger ${(game.isOnSale == "1")? "d-flex": "d-none"}">${game.normalPrice}$</p>
+                <h3 class="text-success"><p class="text-dark fs-6 m-0 fw-light">Cheapest price:</p>${(game.cheapest == 0.00)?`It's Free!`: `${game.cheapest}$`}</h3>
+                </div>
+                <a href="./game.html?q=${game.gameID}" class="btn details btn-primary" id="${game.gameID}">View Deals</a>
+                </div>
             </div>
         </div>
         `
