@@ -17,6 +17,7 @@
             <div class="watch-list mt-5 container d-flex row g-4 justify-content-center"></div>
         </div>
     </section>
+    <section class="checkForm"></section>
     
     <footer class="bg-dark py-4 mt-auto"></footer>
     <script src="./js/dynamicListener.min.js"></script>
@@ -26,7 +27,7 @@
         import {initHeader} from './modules/Header.js';
         import {initFooter} from './modules/Footer.js';
         import {initFavourites} from './modules/Games.js';
-    
+        import {initCheckForm, getEmail} from './modules/Alerts.js';
         
         addDynamicEventListener(document.body, 'submit', 'header form', e=>{
             e.preventDefault()
@@ -64,7 +65,17 @@
                 return
             }
         })
+        addDynamicEventListener(document.body, 'submit', '.checkForm form', function (e){
+            e.preventDefault()
+            const email = e.target.elements[0].value.replace('@','%40')
+
+            getEmail(email)
+            
+        })
+
+
         initFooter(document.querySelector('footer'))
+        initCheckForm(document.querySelector('.checkForm'))
         
     </script>
 </body>

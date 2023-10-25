@@ -12,6 +12,7 @@
     <section class="container mb-5">
         <div class="deals row d-flex justify-content-around align-items-start "></div>
     </section>
+    <section class="notify"></section>
 
     <footer class=" bg-dark py-4 mt-auto"></footer>
     
@@ -21,6 +22,7 @@
         import {initHeader} from './modules/Header.js';
         import {initFooter} from './modules/Footer.js';
         import {getGame, initDeals, initGame} from './modules/Game.js';
+        import {initForm, submitAlertToApi} from './modules/Alerts.js'
     
         let current_game;      
         const id = window.location.href.split('=')[1]
@@ -71,6 +73,14 @@
             window.location.href = `http://127.0.0.1:5500/games.html?q=${e.target.elements[0].value}`;
         })
 
+        //event listeneri per me bo submit alertin ne email
+        addDynamicEventListener(document.body, 'submit', '.notify form', e =>{
+            e.preventDefault()
+            const email = e.target.elements[0].value.replace('@','%40')
+            const desiredPrice = e.target.elements[1].value
+
+            submitAlertToApi(email, desiredPrice, id)
+        })
         // opsioni per logout
         addDynamicEventListener(document.body, 'click', '#logout', function (e){
             var conf = confirm('Do you want to log out?')
@@ -83,6 +93,7 @@
                 return
             }
         })
+        initForm(document.querySelector('.notify'))
         initFooter(document.querySelector('footer'))
     </script>
 </body>
