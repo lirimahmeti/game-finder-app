@@ -22,7 +22,7 @@ export function initGames(games, display_limit) {
         for(let game of data){
             console.log(game);
             html += `
-            <div class="col-xxl-3 col-lg-3 col-md-4 col-sm-12 d-flex align-items-between justify-content-center">
+            <div class="col-xxl-3 col-lg-3  col-md-4 col-sm-12 d-flex align-items-between justify-content-center">
                 <div class="card mb-3 w-100">
                     <img src="${game.thumb}" class="card-img-top" alt="thumbnail of game: ${game.title}">
                     <div class="card-body card-body d-flex flex-column align-items-start justify-content-between">

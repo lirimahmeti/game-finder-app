@@ -37,7 +37,7 @@
          current_game = data
         })
         }else{
-            window.location.href = `http://127.0.0.1:5500/index.html`
+            window.location.href = `https://lirimahmeti.github.io/game-finder-app.github.io/index.html`
         }
 
         addDynamicEventListener(document.body, 'click', '#add-to-favourites', function (e){
@@ -70,7 +70,7 @@
 
         addDynamicEventListener(document.body, 'submit', 'header form', e=>{
             e.preventDefault()
-            window.location.href = `http://127.0.0.1:5500/games.html?q=${e.target.elements[0].value}`;
+            window.location.href = `https://lirimahmeti.github.io/game-finder-app.github.io/games.html?q=${e.target.elements[0].value}`;
         })
 
         //event listeneri per me bo submit alertin ne email
@@ -88,7 +88,7 @@
             if(conf){
                 e.preventDefault()
                 localStorage.removeItem('loggedin_user')
-                window.location.href = `http://127.0.0.1:5500/index.html`
+                window.location.href = `https://lirimahmeti.github.io/game-finder-app.github.io/index.html`
             }else{
                 return
             }
