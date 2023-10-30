@@ -70,7 +70,7 @@ export function initHeadline(div){
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="http://127.0.0.1:5500/assets/images/banner.jpg" alt="..." /></div>
+                <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="https://lirimahmeti.github.io/game-finder-app.github.io/assets/images/banner.jpg" alt="..." /></div>
             </div>
         </div>
     </header>
